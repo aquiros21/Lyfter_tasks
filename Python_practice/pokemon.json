@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Pikachu",
+        "type": "Electric",
+        "level": 54,
+        "weight_kg": 6.0,
+        "is_shiny": false,
+        "held_item": null,
+        "skills": [
+            "Thunder Shock",
+            "Quick Attack",
+            "Thunderbolt",
+            "Volt Tackle"
+        ],
+        "stats": {
+            "hp": 35,
+            "attack": 55,
+            "defense": 40,
+            "sp_attack": 50,
+            "sp_defense": 50,
+            "speed": 90
+        }
+    },
+    {
+        "name": "Charmander",
+        "type": "Fire",
+        "level": 8,
+        "weight_kg": 8.5,
+        "is_shiny": true,
+        "held_item": "Charcoal",
+        "skills": [
+            "Ember",
+            "Scratch",
+            "Tackle",
+            "Smokescreen"
+        ],
+        "stats": {
+            "hp": 39,
+            "attack": 52,
+            "defense": 43,
+            "sp_attack": 60,
+            "sp_defense": 50,
+            "speed": 65
+        }
+    },
+    {
+        "name": "Test 2",
+        "type": "Test 2",
+        "level": 88,
+        "weight_kg": 90.0,
+        "is_shiny": false,
+        "held_item": "xp",
+        "skills": [
+            "10",
+            "fly"
+        ],
+        "stats": {
+            "hp": 21,
+            "attack": 2,
+            "defense": 100,
+            "sp_attack": 90,
+            "sp_defense": 9,
+            "speed": 45
+        }
+    },
+    {
+        "name": "Test 4",
+        "type": "Fire",
+        "level": 99,
+        "weight_kg": 199.0,
+        "is_shiny": true,
+        "held_item": null,
+        "skills": [
+            "test 1",
+            "test 2"
+        ],
+        "stats": {
+            "hp": 99,
+            "attack": 22,
+            "defense": 33,
+            "sp_attack": 44,
+            "sp_defense": 55,
+            "speed": 33
+        }
+    }
+]

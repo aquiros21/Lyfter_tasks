@@ -1,0 +1,57 @@
+Precio Producto
+
+1. Inicio
+2. Definir precio_de_producto
+3. Definir descuento
+4. Definir precio_con_descuento
+4. Mostrar "Ingrese precio de producto"
+5. Pedir precio_de_producto
+6. Si (precio_de_producto < 100) entonces:
+	1. descuento = precio_de_producto * 0.02
+7. Sino:
+	1. Si precio_de_producto >= 100 entonces:
+		1. descuento = precio de producto * 0.10 
+	2. FinSi
+8. FinSi
+9. precio_con_descuento = precio_de_producto-descuento
+10. Mostrar "El precio con descuento es"
+11. Mostrar precio_con_descuento
+12. Fin
+
+Tiempo en segundos
+
+1. Inicio
+2. Definir tiempo_en_segundos
+3. Definir diferencia_para_10minutos
+4. Definir resultado
+5. Mostar "Ingrese tiempo en segundos"
+6. Pedir tiempo_en_segundos
+7. Si tiempo_en_segundos es < 600 entonces:
+	1. resultado = 600 - tiempo_en_segundos
+8. Sino
+	1. Si tiempo en segundos == 600 entonces:
+		1. resultado = Igual
+	2. Sino:
+		1. resultado = Mayor
+	3. FinSi
+9.FinSi
+10. Mostrar "La diferencia de segundos para 10min"
+11. Mostrar resultado
+12. Fin
+
+
+Algoritmo de Suma
+
+1. Inicio
+2. Definir numero
+3. Definir suma
+4. Definir contador
+5. Mostrar "Ingrese un número"
+6. Pedir numero
+7. suma = 0
+8. Para contador = 1 hasta numero ser:
+    1. suma = suma + contador
+9. FinPara
+10. Mostrar "La suma de los números del 1 hasta el número ingresado es"
+11. Mostrar suma
+12. Fin
