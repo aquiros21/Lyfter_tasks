@@ -1,0 +1,69 @@
+Video Youtube
+
+1. Inicio
+2. Abrir Navegador
+3. Ingresar en el navegador 'youtube'
+4. Localizar el video y darle play
+5. Fin
+
+Video Youtubev2.0
+
+1. Inicio
+2. Abrir el Navegador
+	1. Localizar en las aplicaciones de la computarora el navegador de interes
+	2. Doble click para abrirlo
+3. Ingresar en el navegador 'youtube'
+	1. Localizar la seccion del URL, ingresar en el teclado 'youtube.com'
+	2. Esperar a que la pagina cargue
+4. Localizar el video y darle play
+	1. Darle click en el logo de "YouTube" para dirigirse a la pagina principal
+	2. Desde la pagina principal abrir el video en la seccion de recomendados
+5. Fin
+
+
+Rutina Diaria
+
+1. Despertar
+2. Comer
+3. Ducharse
+4. Trabajar
+6. Jugar videojuegos
+7. Dormir
+
+Rutina Diariav2.0
+
+1. Despertar
+	1. Abrir los ojos
+	2. Si es un dia entre semana, levantarse.
+	3. Sino es un dia entre semana, seguir durmiendo 2 horas mas
+2. Comer
+	1. Dirigirse hacia la cocina
+	2. Si los platos estan limpios, comenzar a obtener los ingredients
+	3. Sino estan limpios, limpiar los platos y utensilios necesarios
+	4. Obtener los ingredients necesarios para cocinar la comida
+	5. Si estan disponibles todos los ingredientes y faltan al mas de 30min para comenzar el trabajo, comenzar a cocinar
+	6. Si faltan menos de 30min para comenzar el trabajo no comer nada.
+	7. Si se completa cocinar sentarse en la mesa a comer
+		i. Agarrar una cucharada de la comida disponible del plata para comer
+		ii. Mientras haya comida en el plato.
+		iii. Agarrar una cucharada mas.
+3. Ducharse
+	1. Si quedan al menos 20min antes de comenzar al trabajo entrar a la ducha y hay agua disponible, entrar a la ducha
+	2. Sino quedan mas de 20min antes de comenzar el trabajo, no ducharse
+	3. Si se tomo la ducha, elegir la ropa del dia y vestirse
+4. Trabajar
+	1. Si es dia laboral y hay electricidad e internet, encender la computadora del trabajo
+	2. Si no se cumple, reportar por mensaje al supervisor que no se puede trabajar
+	3. Con la computadora encendidad, abrir todas las paginas necesarias para cumpliar con la labor del dia
+5. Jugar videojuegos
+	1. Si hay electricidad, energia suficiente, encender la computadora personal
+	2. Decidir cual juego se elige para el dia y abrir el juego de seleccion.
+	3. Cuando se cumple la hora de juego, revisar los niveles de energia.	
+	4.  Mientras los niveles de energia sean altos, jugar una hora adicional.
+6. Dormir
+	1. Lavarse los dientes
+	2. Utilizar hilo dental, enjuague bucal y cepillar los dientes con pasta dental
+	3. Si la ropa esta sucia, cambiarse de ropa.
+	4. Si los niveles de energia siguen altos, abrir tik tok en telefono por una hora.
+	5. Si no, acostarse en la cama y cerrar los ojos.
+
