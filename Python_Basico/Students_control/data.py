@@ -1,7 +1,7 @@
 import csv
 import os
-from actions import display_students
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+students_list = []
 
 
 def asking_grade(prompt):
@@ -49,52 +49,98 @@ def get_student():
     print("Student(s) successfully added!")
     return student
 
-students_list = []
-
-
-def save_students(student):
-    file_exists = os.path.exists("students.csv")
-    
-    with open("students.csv", "a", encoding="utf-8", newline="") as f:
-        fieldnames = ["full_name", "group", "spanish_grade", "english_grade", "science_grade", "social_grade"]
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        
-        if not file_exists:
-            writer.writeheader()  
-        
-        writer.writerow(student)
-
 
 def delete_student():
-    display_students("students.csv")
-    
-    name = input("Enter the full name of the student you want to delete: ").strip()
-    group = input("Enter the group of the student you want to delete: ").strip().upper()
-
-    with open("students.csv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        students = list(reader)
+    name = input("Please enter the name of the student you want to delete: ").strip()
+    group = input("Please enter the group of the student you want to delete: ").strip().upper()
 
     student_found = None
-    for student in students:
+    for student in students_list:
         if student["full_name"].lower() == name.lower() and student["group"].upper() == group:
             student_found = student
             break
-
+    
     if not student_found:
-        print("Student not found, please check the name and group.")
+        print("Student not found, please double check entry.")
         return
-
+    
     print(f"\nYou are about to delete: {student_found}")
-    confirm = input("Are you sure? (yes/no): ").strip().lower()
+    confirm = input("Are you sure? (Yes/No): ").strip().lower()
 
     if confirm == "yes":
-        students.remove(student_found)
-        with open("students.csv", "w", encoding="utf-8", newline="") as f:
-            fieldnames = ["full_name", "group", "spanish_grade", "english_grade", "science_grade", "social_grade"]
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(students)
+        students_list.remove(student_found)
         print("Student successfully deleted!")
     else:
-        print("Deletion cancelled.")
+        print("Deletion canceled.")
+
+
+def export_students():
+    if not students_list:
+        print("No students to export.")
+        return
+
+    existing_students = []
+    file_exists = os.path.exists("students.csv")
+
+    if file_exists:
+        with open("students.csv", "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            existing_students = list(reader)
+
+    new_students = []
+    for student in students_list:
+        is_duplicate = any(
+            e["full_name"].lower() == student["full_name"].lower() and
+            e["group"].upper() == student["group"].upper()
+            for e in existing_students
+        )
+        if not is_duplicate:
+            new_students.append(student)
+
+    if not new_students:
+        print("No new students to export, all already exist in the CSV.")
+        return
+
+    with open("students.csv", "a", encoding="utf-8", newline="") as f:
+        fieldnames = ["full_name", "group", "spanish_grade", "english_grade", "science_grade", "social_grade"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerows(new_students)
+
+    print(f"{len(new_students)} student(s) successfully exported to students.csv!")
+
+
+def import_students():
+    if not os.path.exists("students.csv"):
+        print("No previously exported CSV file found.")
+        return
+
+    with open("students.csv", "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        imported_students = list(reader)
+
+    if not imported_students:
+        print("The CSV file is empty.")
+        return
+
+    duplicates = 0
+    added = 0
+
+    for student in imported_students:
+        is_duplicate = any(
+            e["full_name"].lower() == student["full_name"].lower() and
+            e["group"].upper() == student["group"].upper()
+            for e in students_list
+        )
+        if not is_duplicate:
+            students_list.append(student)
+            added += 1
+        else:
+            duplicates += 1
+
+    print(f"{added} student(s) successfully imported!")
+    if duplicates > 0:
+        print(f"{duplicates} student(s) skipped because they were already in the list.")

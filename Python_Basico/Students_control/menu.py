@@ -6,4 +6,6 @@ def show_menu():
         print("4. Show overall grades average")
         print("5. Show top 3 students with higher grades average")
         print("6. Display students with failed grades")
-        print("7. Exit this menu")
+        print("7. Export students list to CSV")
+        print("8. Import list from existing CSV")
+        print("9. Exit this menu")

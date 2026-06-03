@@ -1,28 +1,16 @@
 import csv
-import os
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-
-def display_students(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        display_list = csv.DictReader(f)
-        for student in display_list:
-            print(dict(student))
+from data import students_list
 
 
 def average_grades():
-    with open("students.csv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        students = list(reader)
-
-    if not students:
+    if not students_list:
         print("No students found.")
         return
 
     total = 0
     count = 0
 
-    for student in students:
+    for student in students_list:
         student_avg = (int(student["spanish_grade"]) + int(student["english_grade"]) + 
                         int(student["science_grade"]) + int(student["social_grade"])) / 4
         total += student_avg
@@ -33,33 +21,27 @@ def average_grades():
 
 
 def top_3_students():
-    with open("students.csv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        students = list(reader)
-
-    if not students:
+    if not students_list:
         print("No students found.")
         return
 
-    for student in students:
-        student["average"] = (int(student["spanish_grade"]) + int(student["english_grade"]) +
-                            int(student["science_grade"]) + int(student["social_grade"])) / 4
-
-    sorted_students = sorted(students, key=lambda s: s["average"], reverse=True)
+    sorted_students = sorted(students_list, 
+                            key=lambda s: (int(s["spanish_grade"]) + int(s["english_grade"]) + 
+                                            int(s["science_grade"]) + int(s["social_grade"])) / 4, 
+                            reverse=True)
 
     top_3 = sorted_students[:3]
 
     print("\nTop 3 students with highest averages are:")
     for i, student in enumerate(top_3, start=1):
-        print(f"{i}. {student['full_name']} - Group: {student['group']} - Average: {student['average']:.2f}")
+        avg = (int(student["spanish_grade"]) + int(student["english_grade"]) + 
+            int(student["science_grade"]) + int(student["social_grade"])) / 4
+        print(f"{i}. {student['full_name']} - Group: {student['group']} - Average: {avg:.2f}")
+
 
 
 def failed_students():
-    with open("students.csv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        students = list(reader)
-
-    if not students:
+    if not students_list:
         print("No students found.")
         return
 
@@ -72,7 +54,7 @@ def failed_students():
 
     found_failed = False
 
-    for student in students:
+    for student in students_list:
         failed_subjects = []
         for key, subject_name in subjects.items():
             if int(student[key]) < 60:
@@ -86,3 +68,5 @@ def failed_students():
 
     if not found_failed:
         print("No students with failed grades.")
+
+
