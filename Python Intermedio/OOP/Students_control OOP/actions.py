@@ -39,7 +39,6 @@ def top_3_students():
         print(f"{i}. {student.name} - Group: {student.group} - Average: {avg:.2f}")
 
 
-
 def failed_students():
     if not students_list:
         print("No students found.")
@@ -57,12 +56,12 @@ def failed_students():
     for student in students_list:
         failed_subjects = []
         for key, subject_name in subjects.items():
-            if int(student[key]) < 60:
-                failed_subjects.append(f"{subject_name}: {student[key]}")
+            if int(getattr(student, key)) < 60:
+                failed_subjects.append(f"{subject_name}: {getattr(student, key)}")
 
         if failed_subjects:
             found_failed = True
-            print(f"\nStudent: {student['full_name']} - Group: {student['group']}")
+            print(f"\nStudent: {student.name} - Group: {student.group}")
             for subject in failed_subjects:
                 print(f"   - {subject}")
 
