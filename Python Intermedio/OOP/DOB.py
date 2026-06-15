@@ -1,15 +1,11 @@
 from datetime import date
 
-
 def check_legal_age(func):
     def wrapper(user):
-        if user.age >= 18:
-            result = func(user)
-        else:
-            raise ValueError (f"This user is not of legal age")
-
-        return result
-
+        if user.age < 18:
+            raise ValueError(f"This user is not of legal age")
+        return func(user)
+    
     return wrapper
 
 
@@ -32,7 +28,9 @@ class User:
 def welcome_user(user):
     return f"Welcome {user.name}."
 
-user1 = User("Adrian", date(2010, 10, 21))
+user1 = User("Adrian", date(2000, 10, 21))
+user2 = User("Andres", date(2010, 10, 21))
 
 print(welcome_user(user1))
+print(welcome_user(user2))
 
