@@ -1,3 +1,31 @@
+def bubble_sort(sorting_list):
+    for outer_index in range(0, len(sorting_list) - 1): # O(n)
+        changes_made = False # O(1)
+        for index in range(0, len(sorting_list) - 1): # O(n)
+            current_element = sorting_list[index] # O(1)
+            next_element = sorting_list[index + 1] # O(1)
+            if current_element > next_element: # O(1)
+                sorting_list[index] = next_element # O(1)
+                sorting_list[index + 1] = current_element # O(1)
+                changes_made = True # O(1)
+        if not changes_made: # O(1)
+            return # O(1)
+
+
+def bubble_sort_right_to_left(sorting_list):
+    for outer_index in range(0, len(sorting_list) - 1): # O(n)
+        changes_made = False # O(1)
+        for index in range(len(sorting_list) - 1, 0, -1): # O(n)
+            current_element = sorting_list[index] # O(1)
+            prev_element = sorting_list[index - 1] # O(1)
+            if current_element < prev_element: # O(1)
+                sorting_list[index] = prev_element # O(1)
+                sorting_list[index - 1] = current_element # O(1)
+                changes_made = True # O(1)
+        if not changes_made:# O(1)
+            return # O(1)
+
+
 def print_numbers_times_2(numbers_list): 
 	for number in numbers_list: # O(n)
 		print(number * 2) # O(1)
