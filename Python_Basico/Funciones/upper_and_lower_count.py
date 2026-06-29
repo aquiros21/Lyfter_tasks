@@ -9,5 +9,11 @@ def count_capitals(string):
         elif letter.islower():
             lower += 1
     print(f"There are {upper} case letters and there are {lower} lower case letters")
+    return upper, lower
 
 count_capitals(global_sample)
+
+
+if __name__ == '__main__':
+    print(count_capitals("This is a Test For Upper case"))
+
