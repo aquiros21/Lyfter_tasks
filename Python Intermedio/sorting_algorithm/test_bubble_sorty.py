@@ -13,7 +13,7 @@ class TestBubbleSort(unittest.TestCase):
 
     def test_bubble_sort_large_list(self):
         import random
-        sorting_list = random.sample(range(1000), 100)
+        sorting_list = random.sample(range(1000), 101)
         expected = sorted(sorting_list)
         bubble_sort(sorting_list)
         self.assertEqual(sorting_list, expected)

@@ -1,10 +1,7 @@
 def sort_alphabetic(string):
     words_list = string.split("-")
     words_list.sort()
-    return "-".join(list)
-
-
-print(sort_alphabetic("apple-house-car-berries"))
+    return "-".join(words_list)
 
 
 if __name__ == '__main__':
