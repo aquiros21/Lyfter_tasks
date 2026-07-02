@@ -1,4 +1,7 @@
 def bubble_sort(sorting_list):
+    if not isinstance(sorting_list, list):
+        raise TypeError("Input must be a list")
+    
     for outer_index in range (0, len(sorting_list) - 1):
         changes_made = False
 

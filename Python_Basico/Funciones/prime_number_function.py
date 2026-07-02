@@ -13,4 +13,5 @@ def show_prime(numbers):
     return primes
 
 
-print(show_prime([1, 4, 7, 21, 45, 67, 90, 101]))
+if __name__ == '__main__':
+    print(show_prime([7, 8, 13, 15, 67, 101, 199, 202, 25]))
