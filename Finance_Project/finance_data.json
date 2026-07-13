@@ -1,0 +1,47 @@
+{
+    "categories": [
+        {
+            "name": "Food"
+        },
+        {
+            "name": "Salary"
+        },
+        {
+            "name": "Rent"
+        }
+    ],
+    "transactions": [
+        {
+            "title": "Breakfast",
+            "amount": 1000.0,
+            "category": {
+                "name": "Food"
+            },
+            "type": "Expense"
+        },
+        {
+            "title": "Salary",
+            "amount": 10000.0,
+            "category": {
+                "name": "Salary"
+            },
+            "type": "Income"
+        },
+        {
+            "title": "Lunch",
+            "amount": 400.0,
+            "category": {
+                "name": "Food"
+            },
+            "type": "Expense"
+        },
+        {
+            "title": "Rent",
+            "amount": 1000.0,
+            "category": {
+                "name": "Rent"
+            },
+            "type": "Expense"
+        }
+    ]
+}
