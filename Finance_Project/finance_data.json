@@ -8,6 +8,9 @@
         },
         {
             "name": "Rent"
+        },
+        {
+            "name": "Bills"
         }
     ],
     "transactions": [
@@ -40,6 +43,14 @@
             "amount": 1000.0,
             "category": {
                 "name": "Rent"
+            },
+            "type": "Expense"
+        },
+        {
+            "title": "Electricity",
+            "amount": 400.0,
+            "category": {
+                "name": "Bills"
             },
             "type": "Expense"
         }

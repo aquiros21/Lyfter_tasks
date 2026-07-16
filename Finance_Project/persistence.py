@@ -35,13 +35,7 @@ def load_data(filename):
             manager.transactions.append(rebuilt_transaction)
 
         return manager
-    
-    except FileNotFoundError:
+
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, ValueError):
         return FinanceManager()
 
-
-
-if __name__ == "__main__":
-    new_manager = load_data("nonexistent_file.json")
-    print(new_manager.categories)
-    print(new_manager.transactions)
