@@ -32,6 +32,10 @@ def get_tasks():
 @app.route('/tasks', methods=['POST'])
 def create_task():
     data = request.get_json()
+
+    if data is None:
+        return jsonify({"error": "Request body must be valid JSON"}), 400
+
     tasks = read_tasks()
 
     if not data.get('id'):
@@ -67,6 +71,10 @@ def create_task():
 @app.route('/tasks/<id>', methods=['PUT'])
 def update_task(id):
     data = request.get_json()
+
+    if data is None:
+        return jsonify({"error": "Request body must be valid JSON"}), 400
+
     tasks = read_tasks()
 
     task = next((t for t in tasks if t['id'] == id), None)
