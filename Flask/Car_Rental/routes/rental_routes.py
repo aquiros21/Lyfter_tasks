@@ -1,11 +1,10 @@
 from flask import Blueprint, request, jsonify
 import psycopg2
-from repositories.rental_repository import create_rental, complete_rental, update_rental_status
-from db_config import get_connection
-from repositories.rental_repository import create_rental
-from repositories.car_repository import update_car_status
-from repositories.rental_repository import create_rental, complete_rental, update_rental_status, get_rentals
 
+from db_config import get_connection
+from repositories.rental_repository import create_rental, complete_rental, update_rental_status, get_rentals
+from repositories.car_repository import update_car_status, get_car_by_id
+from repositories.user_repository import get_user_by_id
 
 rental_bp = Blueprint('rental_routes', __name__)
 
@@ -26,6 +25,18 @@ def create_rental_route():
     cursor = connection.cursor()
 
     try:
+        user = get_user_by_id(cursor, data['user_id'])
+        if user is None:
+            return jsonify({"error": "User not found"}), 404
+        if user['status'] != 'active':
+            return jsonify({"error": f"User is not active (current status: {user['status']})"}), 400
+
+        car = get_car_by_id(cursor, data['car_id'])
+        if car is None:
+            return jsonify({"error": "Car not found"}), 404
+        if car['status'] != 'available':
+            return jsonify({"error": f"Car is not available (current status: {car['status']})"}), 400
+
         rental_id = create_rental(cursor, data['user_id'], data['car_id'])
         update_car_status(cursor, data['car_id'], "rented")
         connection.commit()

@@ -1,9 +1,8 @@
 from flask import Blueprint, request, jsonify
-from repositories.user_repository import insert_single_user, update_user_status
 import psycopg2
-from repositories.user_repository import insert_single_user, update_user_status, get_users
+
 from db_config import get_connection
-from repositories.user_repository import insert_single_user
+from repositories.user_repository import insert_single_user, update_user_status, get_users
 
 user_bp = Blueprint('user_routes', __name__)
 

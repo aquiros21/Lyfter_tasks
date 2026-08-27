@@ -1,7 +1,6 @@
 from flask import Blueprint, request, jsonify
-from repositories.car_repository import insert_single_car, update_car_status
+
 from db_config import get_connection
-from repositories.car_repository import insert_single_car
 from repositories.car_repository import insert_single_car, update_car_status, get_cars
 
 car_bp = Blueprint('car_routes', __name__)

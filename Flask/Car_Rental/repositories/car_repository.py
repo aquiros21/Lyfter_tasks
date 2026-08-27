@@ -63,3 +63,16 @@ def get_cars(cursor, filters=None):
     rows = cursor.fetchall()
 
     return [dict(zip(columns, row)) for row in rows]
+
+
+def get_car_by_id(cursor, car_id):
+    cursor.execute("""
+        SELECT id, brand, model, year, status
+        FROM lyfter_car_rental.cars
+        WHERE id = %s;
+    """, (car_id,))
+    row = cursor.fetchone()
+    if row is None:
+        return None
+    columns = [desc[0] for desc in cursor.description]
+    return dict(zip(columns, row))

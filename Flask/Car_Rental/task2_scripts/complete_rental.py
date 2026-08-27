@@ -4,21 +4,24 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from db_config import get_connection
-from repositories.rental_repository import create_rental
+from repositories.rental_repository import complete_rental
 from repositories.car_repository import update_car_status
 
 connection = get_connection()
 cursor = connection.cursor()
 
 try:
-    user_id = 2
-    car_id = 3
+    rental_id = 1
 
-    rental_id = create_rental(cursor, user_id, car_id)
-    update_car_status(cursor, car_id, "rented")
+    result = complete_rental(cursor, rental_id)
 
-    connection.commit()
-    print(f"Rental created with id: {rental_id}, car {car_id} marked as rented.")
+    if result is None:
+        print("No rental found with that id.")
+    else:
+        completed_rental_id, car_id = result
+        update_car_status(cursor, car_id, "available")
+        connection.commit()
+        print(f"Rental {completed_rental_id} completed, car {car_id} marked as available.")
 
 finally:
     cursor.close()

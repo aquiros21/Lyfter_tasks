@@ -28,15 +28,6 @@ def insert_single_user(cursor, full_name, email, username, password, birth_date,
     return cursor.fetchone()[0]
 
 
-def insert_single_car(cursor, brand, model, year, status="available"):
-    cursor.execute("""
-        INSERT INTO lyfter_car_rental.cars (brand, model, year, status)
-        VALUES (%s, %s, %s, %s)
-        RETURNING id;
-    """, (brand, model, year, status))
-    return cursor.fetchone()[0]
-
-
 def update_user_status(cursor, user_id, new_status):
     cursor.execute("""
         UPDATE lyfter_car_rental.users
@@ -65,3 +56,16 @@ def get_users(cursor, filters=None):
     rows = cursor.fetchall()
 
     return [dict(zip(columns, row)) for row in rows]
+
+
+def get_user_by_id(cursor, user_id):
+    cursor.execute("""
+        SELECT id, full_name, email, username, status
+        FROM lyfter_car_rental.users
+        WHERE id = %s;
+    """, (user_id,))
+    row = cursor.fetchone()
+    if row is None:
+        return None
+    columns = [desc[0] for desc in cursor.description]
+    return dict(zip(columns, row))
