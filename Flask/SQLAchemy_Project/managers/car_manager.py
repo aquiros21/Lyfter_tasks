@@ -1,3 +1,5 @@
+from sqlalchemy.orm import joinedload
+
 from db_config import get_session
 from models import Car
 
@@ -28,7 +30,11 @@ class CarManager:
             if car is None:
                 return None
 
+            valid_columns = {column.name for column in Car.__table__.columns}
+
             for key, value in fields.items():
+                if key not in valid_columns:
+                    raise ValueError(f"'{key}' is not a valid column on Car")
                 setattr(car, key, value)
 
             session.commit()
@@ -52,7 +58,7 @@ class CarManager:
     def get_all_cars(self):
         session = get_session()
         try:
-            return session.query(Car).all()
+            return session.query(Car).options(joinedload(Car.user)).all()
         finally:
             session.close()
 

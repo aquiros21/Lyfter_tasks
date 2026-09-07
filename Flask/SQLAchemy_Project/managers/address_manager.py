@@ -1,3 +1,5 @@
+from sqlalchemy.orm import joinedload
+
 from db_config import get_session
 from models import Address
 
@@ -28,7 +30,11 @@ class AddressManager:
             if address is None:
                 return None
 
+            valid_columns = {column.name for column in Address.__table__.columns}
+
             for key, value in fields.items():
+                if key not in valid_columns:
+                    raise ValueError(f"'{key}' is not a valid column on Address")
                 setattr(address, key, value)
 
             session.commit()
@@ -52,6 +58,6 @@ class AddressManager:
     def get_all_addresses(self):
         session = get_session()
         try:
-            return session.query(Address).all()
+            return session.query(Address).options(joinedload(Address.user)).all()
         finally:
             session.close()

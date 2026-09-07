@@ -1,3 +1,5 @@
+from sqlalchemy.orm import joinedload
+
 from db_config import get_session
 from models import User
 
@@ -29,7 +31,11 @@ class UserManager:
             if user is None:
                 return None
 
+            valid_columns = {column.name for column in User.__table__.columns}
+
             for key, value in fields.items():
+                if key not in valid_columns:
+                    raise ValueError(f"'{key}' is not a valid column on User")
                 setattr(user, key, value)
 
             session.commit()
@@ -53,6 +59,9 @@ class UserManager:
     def get_all_users(self):
         session = get_session()
         try:
-            return session.query(User).all()
+            return session.query(User).options(
+                joinedload(User.addresses),
+                joinedload(User.cars)
+            ).all()
         finally:
             session.close()
