@@ -173,11 +173,13 @@ def purchase():
         quantity=data["quantity"]
     )
 
-    if isinstance(result, dict) and result.get("error") == "not_found":
-        return jsonify({"error": "Product not found"}), 404
-
-    if isinstance(result, dict) and result.get("error") == "insufficient_stock":
-        return jsonify({"error": "Not enough stock available"}), 400
+    if isinstance(result, dict):
+        if result.get("error") == "invalid_quantity":
+            return jsonify({"error": "Quantity must be a positive integer"}), 400
+        if result.get("error") == "not_found":
+            return jsonify({"error": "Product not found"}), 404
+        if result.get("error") == "insufficient_stock":
+            return jsonify({"error": "Not enough stock available"}), 400
 
     return jsonify({
         "id": result.id,

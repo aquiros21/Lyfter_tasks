@@ -7,6 +7,9 @@ class InvoiceManager:
     def create_purchase(self, user_id, product_id, quantity):
         session = get_session()
         try:
+            if not isinstance(quantity, int) or quantity <= 0:
+                return {"error": "invalid_quantity"}
+
             product = session.get(Product, product_id)
 
             if product is None:

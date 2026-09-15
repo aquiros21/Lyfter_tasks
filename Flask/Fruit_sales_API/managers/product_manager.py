@@ -4,6 +4,8 @@ from models import Product
 
 class ProductManager:
 
+    EDITABLE_COLUMNS = {"name", "price", "entry_date", "quantity"}
+
     def create_product(self, name, price, entry_date, quantity):
         session = get_session()
         try:
@@ -41,11 +43,9 @@ class ProductManager:
             if product is None:
                 return None
 
-            valid_columns = {column.name for column in Product.__table__.columns}
-
             for key, value in fields.items():
-                if key not in valid_columns:
-                    raise ValueError(f"'{key}' is not a valid column on Product")
+                if key not in self.EDITABLE_COLUMNS:
+                    raise ValueError(f"'{key}' is not an editable field on Product")
                 setattr(product, key, value)
 
             session.commit()

@@ -11,23 +11,33 @@ jwt_manager = JWT_Manager(
 )
 
 
+def authenticate_request():
+    token = request.headers.get("Authorization")
+
+    if token is None:
+        return None, (jsonify({"error": "Missing Authorization header"}), 401)
+
+    token = token.replace("Bearer ", "")
+    decoded = jwt_manager.decode(token)
+
+    if decoded is None:
+        return None, (jsonify({"error": "Invalid or expired token"}), 401)
+
+    user = user_manager.get_user_by_id(decoded["id"])
+
+    if user is None:
+        return None, (jsonify({"error": "User not found"}), 404)
+
+    return user, None
+
+
 def require_auth(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        token = request.headers.get("Authorization")
+        user, error_response = authenticate_request()
 
-        if token is None:
-            return jsonify({"error": "Missing Authorization header"}), 401
-
-        token = token.replace("Bearer ", "")
-        decoded = jwt_manager.decode(token)
-
-        if decoded is None:
-            return jsonify({"error": "Invalid or expired token"}), 401
-
-        user = user_manager.get_user_by_id(decoded["id"])
-        if user is None:
-            return jsonify({"error": "User not found"}), 404
+        if error_response is not None:
+            return error_response
 
         request.current_user = user
         return f(*args, **kwargs)
@@ -38,20 +48,10 @@ def require_auth(f):
 def require_admin(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        token = request.headers.get("Authorization")
+        user, error_response = authenticate_request()
 
-        if token is None:
-            return jsonify({"error": "Missing Authorization header"}), 401
-
-        token = token.replace("Bearer ", "")
-        decoded = jwt_manager.decode(token)
-
-        if decoded is None:
-            return jsonify({"error": "Invalid or expired token"}), 401
-
-        user = user_manager.get_user_by_id(decoded["id"])
-        if user is None:
-            return jsonify({"error": "User not found"}), 404
+        if error_response is not None:
+            return error_response
 
         if user.role != "admin":
             return jsonify({"error": "Admin access required"}), 403
